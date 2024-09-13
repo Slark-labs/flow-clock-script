@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
               const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
               const { data } = await response.json();
+
+              if (data.status === 'deleted') {
+                clock.style.display = 'none';
+                return; // Exit if the clock is deleted
+              }
+              
               if (data.timezone) {
                 const timeZoneTime = await getTimeForTimeZone(data.timezone);
                 if (timeZoneTime) {
