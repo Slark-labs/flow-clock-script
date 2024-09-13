@@ -1,5 +1,5 @@
 
-<svg class="clock2" width="230" height="230" viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="clock clock2" width="230" height="230" viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <circle cx="115" cy="115" r="105" fill="white" stroke="url(#paint0_angular_4637_279)" stroke-width="20"/>
     <circle cx="115" cy="115" r="105" fill="white" stroke="url(#paint1_angular_4637_279)" stroke-width="20"/>
     <path d="M184.187 180.674L181.631 183.229L193.919 198.632L197.384 195.236L184.187 180.674Z" fill="url(#paint2_linear_4637_279)"/>

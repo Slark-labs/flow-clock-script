@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           // If the clock has an ID, hit the API to get the time zone once
           if (clockId) {
             try {
-              const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+              const response = await fetch(`https://data-client-mb-awan-mbawans-projects.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
               const { data } = await response.json();
 
               if (data.status === 'deleted') {

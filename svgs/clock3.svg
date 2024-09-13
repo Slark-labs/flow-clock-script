@@ -1,4 +1,4 @@
-<svg class="clock3" width="230" height="230" viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg class="clock clock3" width="230" height="230" viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="0.5" y="0.5" width="229" height="229" rx="114.5" fill="url(#paint0_linear_4604_256)" stroke="url(#paint1_linear_4604_256)"/>
     <g filter="url(#filter0_iii_4604_256)">
         <rect x="15" y="215" width="199.409" height="199.409" rx="99.7044" transform="rotate(-90 15 215)" fill="url(#paint2_linear_4604_256)"/>
