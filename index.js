@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
+  alert("script is running after update as well");
   const clockTimeZones = {}; // Store time zone offset and the initial time for each clock
 
   async function getTimeForTimeZone(timeZone) {
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const data = await response.json();
       // Extract the UTC datetime and the UTC offset from the API response
       const localDate = new Date();  // Use the UTC datetime from the API
-      const utcOffset = data.utc_offset;  // e.g., "+05:00" or "-03:30"
+      const utcOffset = data?.utc_offset;  // e.g., "+05:00" or "-03:30"
       // Get the local system's time zone offset in minutes (negative for zones ahead of UTC)
       const localOffsetMinutes = localDate.getTimezoneOffset() >= 0 ? localDate.getTimezoneOffset() : -localDate.getTimezoneOffset();  // in minutes
   
@@ -43,16 +44,17 @@ document.addEventListener('DOMContentLoaded', async () => {
           // If the clock has an ID, hit the API to get the time zone once
           if (clockId) {
             try {
-              const response = await fetch(`https://data-client-mb-awan-mbawans-projects.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+              // const response = await fetch(`https://data-client-mb-awan-mbawans-projects.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+              const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
               const { data } = await response.json();
 
-              if (data.status === 'deleted') {
+              if (data?.status === 'deleted') {
                 clock.style.display = 'none';
                 return; // Exit if the clock is deleted
               }
               
-              if (data.timezone) {
-                const timeZoneTime = await getTimeForTimeZone(data.timezone);
+              if (data?.timezone) {
+                const timeZoneTime = await getTimeForTimeZone(data?.timezone);
                 if (timeZoneTime) {
                   // Store the timezone time and offset in clockTimeZones for future updates
                   clockTimeZones[clockId] = {
