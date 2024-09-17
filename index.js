@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  alert("script is running after update as well");
   const clockTimeZones = {}; // Store time zone offset and the initial time for each clock
 
   async function getTimeForTimeZone(timeZone) {
@@ -44,10 +43,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           // If the clock has an ID, hit the API to get the time zone once
           if (clockId) {
             try {
+              console.log({ clockId });
               // const response = await fetch(`https://data-client-mb-awan-mbawans-projects.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
               const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+          
               const { data } = await response.json();
 
+              console.log({ data});
               if (data?.status === 'deleted') {
                 clock.style.display = 'none';
                 return; // Exit if the clock is deleted
@@ -97,8 +99,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Function to update the clock every second
   function updateClocks() {
-    for (let i = 1; i <= 6; i++) {
-      const clock = document.querySelector(`.clock${i}`);
+    const clocks = document.getElementsByClassName("clock");
+    Array.from(clocks).forEach(async clock => {
       if (clock) {
         const secondArm = clock.querySelector('#second-arm');
         const minuteArm = clock.querySelector('#minute-arm');
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           hourArm.style.transform = `rotate(${hourDegree}deg)`;
         }
       }
-    }
+    });
   }
 
   // Start the clocks
