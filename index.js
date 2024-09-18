@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (clockId) {
             try {
               console.log({ clockId });
-              // const response = await fetch(`https://data-client-mb-awan-mbawans-projects.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
-              const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+              const response = await fetch(`https://data-client-alpha.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
+              // const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
           
               const { data } = await response.json();
 
