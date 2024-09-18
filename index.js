@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const offsetHours = parseInt(utcOffset.slice(0, 3), 10);  // Hours part (+05 or -03)
       const offsetMinutes = parseInt(utcOffset.slice(4, 6), 10);  // Minutes part (00 or 30)
       const totalOffsetMinutes = offsetHours * 60 + (offsetHours >= 0 ? offsetMinutes : -offsetMinutes);  // Total minutes for the target time zone
-      console.log({ totalOffsetMinutes, localOffsetMinutes, utcOffset})
 
       // Adjust the UTC time by subtracting the local time zone offset and adding the target time zone offset
       const adjustedTime = new Date(localDate.getTime() + (totalOffsetMinutes - localOffsetMinutes) * 60 * 1000);
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Initialize all clocks on the page
   async function initializeClocks() {
-    // Find all clocks (class clock1 to clock6) and set initial rotation
+    // Find all clocks and set initial rotation
     const clocks = document.getElementsByClassName("clock");
     Array.from(clocks).forEach(async clock => {
       if (clock) {
@@ -43,13 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           // If the clock has an ID, hit the API to get the time zone once
           if (clockId) {
             try {
-              console.log({ clockId });
-              const response = await fetch(`https://data-client-alpha.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
-              // const response = await fetch(`http://localhost:3001/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint
-          
+              const response = await fetch(`https://data-client-alpha.vercel.app/api/clocks/${clockId}`); // Adjust this URL to your actual API endpoint      
               const { data } = await response.json();
 
-              console.log({ data});
               if (data?.status === 'deleted') {
                 clock.style.display = 'none';
                 return; // Exit if the clock is deleted
@@ -63,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     time: timeZoneTime,
                     offset: timeZoneTime.getTime() - new Date().getTime() // Store the offset between time zone and local time
                   };
-                  console.log({timeZoneTime})
+
                   setInitialTime(hourArm, minuteArm, secondArm, timeZoneTime);
                   return;
                 }
@@ -82,7 +77,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Function to rotate the hands to the current time
   function setInitialTime(hourArm, minuteArm, secondArm, time) {
-    console.log({time});
     const seconds = time.getSeconds();
     const minutes = time.getMinutes();
     const hours = time.getHours();
@@ -111,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (secondArm && minuteArm && hourArm) {
           // If the clock has an ID and has a stored time zone offset, apply the offset
           if (clockId && clockTimeZones[clockId]) {
-            const { time, offset } = clockTimeZones[clockId];
+            const { offset } = clockTimeZones[clockId];
 
             // Add the stored offset to the current time
             now = new Date(new Date().getTime() + offset);
